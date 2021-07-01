@@ -15,7 +15,6 @@ function App() {
       }
 
       const data = await response.json();
-
       const loadedTasks = [];
 
       for (const key in data) {
@@ -26,7 +25,6 @@ function App() {
           dateCreation: data[key].dateCreation
         });
       }
-      console.log(loadedTasks)
       setTasks(loadedTasks);
     } catch (error) {
       // throw new Error('Something went wrong!');
@@ -35,19 +33,62 @@ function App() {
 
   }, []);
 
+  const deleteTaskHandler = async (taskId) => {
+    try {
+      const response = await fetch(`http://localhost:5050/delete-task/${taskId}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      };
+
+      const data = await response.json();
+
+      setTasks(tasks => {
+        return tasks.filter(task => task.id !== taskId)
+      });
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addTaskHandler = async (taskData) => {
+    try {
+      const response = await fetch('http://localhost:5050/add-task', {
+        method: 'POST',
+        body: JSON.stringify(taskData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+
+      const data = await response.json();
+      fetchTasksHandler(taskURL);
+
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchTasksHandler(taskURL);
   }, [fetchTasksHandler, taskURL]);
 
   const changeTaskURL = url => {
-    console.log(url)
     setTaskURL(url);
   };
 
   return (
     <React.Fragment>
-      <TaskList taskData={tasks} onChangeTaskURL={changeTaskURL}></TaskList>
-      <NewTask></NewTask>
+      <TaskList taskData={tasks} onChangeTaskURL={changeTaskURL} deleteTaskHandler={deleteTaskHandler} />
+      <NewTask addTaskHandler={addTaskHandler}></NewTask>
     </React.Fragment>
   );
 }

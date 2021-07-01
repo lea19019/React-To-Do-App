@@ -39,6 +39,7 @@ const TaskList = (props) => {
                 dateCreation={task.dateCreation}
                 isCompleted={task.isCompleted}
                 isAllView={true}
+                deleteTaskHandler={props.deleteTaskHandler}
             />
         ));
     }
