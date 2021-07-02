@@ -1,0 +1,9 @@
+.button {
+    font-family: 'Quicksand', sans-serif;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin: 0.3rem;
+    padding: 0.25rem;
+}

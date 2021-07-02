@@ -1,0 +1,12 @@
+.taskList {
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    width: 80%;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.603);
+    border-radius: 12px;
+}
+
+.taskList li {
+    list-style-type: none;
+}

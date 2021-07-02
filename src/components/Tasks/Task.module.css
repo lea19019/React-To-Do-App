@@ -1,0 +1,21 @@
+.allView {
+    padding: .4rem 0;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+}
+
+.allView button {
+    border: none;
+    background-color: transparent;
+    padding: 0px;
+    color: red;
+    font-size: larger;
+    font-weight: 900;
+}
+
+.allView input {
+    margin: auto;
+    height: 21px;
+    width: 25px;
+}
